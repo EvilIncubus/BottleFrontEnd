@@ -19,6 +19,11 @@ import ManagerCurrentOrder from "./components/manager/ManagerCurrentOrder";
 import StoremanDashboard from "./components/storeman/StoremanDashboard";
 import StoremanCurrentOrder from "./components/storeman/StoremanCurrentOrder";
 import { StoremanCurrentOrderNotFount } from "./components/storeman/StoremanCurentOrderNotFound";
+import { ShipperPanel } from "./features/shipper/ShipperPanel";
+import ShipperDashboard from "./components/shipper/ShipperDashboard";
+import ShipperCurrentOrder from "./components/shipper/ShipperCurrentOrder";
+import { ShipperCurrentOrderNotFount } from "./components/shipper/ShipperCurentOrderNotFound";
+
 
 export default function App() {
   return (
@@ -91,6 +96,23 @@ export default function App() {
                 exact
                 path="/StoremanPanel/StoremanCurrentOrderNotFound"
                 element={<StoremanCurrentOrderNotFount />}
+              />
+            </Route>
+            <Route exact path="/ShipperPanel" element={<ShipperPanel />}>
+            <Route
+                exact
+                path="/ShipperPanel/ShipperDashboard"
+                element={<ShipperDashboard />}
+              />
+              <Route
+                exact
+                path="/ShipperPanel/ShipperCurrentOrder"
+                element={<ShipperCurrentOrder />}
+              />
+              <Route
+                exact
+                path="/ShipperPanel/ShipperCurrentOrderNotFound"
+                element={<ShipperCurrentOrderNotFount />}
               />
             </Route>
           </Routes>

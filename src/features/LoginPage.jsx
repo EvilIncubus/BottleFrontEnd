@@ -46,11 +46,17 @@ export const LoginPage = () => {
           ({ authority }) => authority === "STOREMAN"
         );
 
+        const isUserShipper = !!redirect?.role?.find(
+          ({ authority }) => authority === "SHIPPER"
+        );
+
         isUserAdmin && navigate("/AdminPanel");
         isUserOperator && navigate("/OperatorPanel");
         isUserManager && navigate("/ManagerPanel");
         isUserStoreman && navigate("/StoremanPanel");
+        isUserShipper && navigate("/ShipperPanel")
       })
+
   };
 
   return (
@@ -62,7 +68,7 @@ export const LoginPage = () => {
         sm={4}
         md={7}
         sx={{
-          backgroundImage: url + "/photos/whiteLogo.jpg)",
+          backgroundImage: 'url(https://source.unsplash.com/random?wallpapers)',
           backgroundColor: (t) =>
             t.palette.mode === "light"
               ? t.palette.grey[50]
