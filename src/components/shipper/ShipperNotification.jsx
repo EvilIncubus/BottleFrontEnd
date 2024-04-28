@@ -14,7 +14,6 @@ import TextField from "@mui/material/TextField";
 import { OrderRow } from "./OrderRow";
 import url from "../url";
 import { UserContext } from "../../StackContext";
-import StoremanDashboardFilter from "./StoremanDashboardFilter";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import dayjs from "dayjs";
@@ -27,7 +26,7 @@ const columns = [
   { id: 'status', label: 'Order Status', minWidth: 120},
 ];
 
-export default function StoremanPanelOrders() {
+export default function ShipperNotification() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [data, setData] = React.useState([]);
@@ -136,41 +135,9 @@ export default function StoremanPanelOrders() {
           mt: 4,
         }}
       >
-        <Box
-          m="left"
-          sx={{
-            width: 300,
-            ml: 4,
-          }}
-        >
-          <StoremanDashboardFilter
-            handleChangeStatus={handleChangeStatus}
-            handleChangeFromDate={handleChangeFromDate}
-            handleChangeToDate={handleChangeToDate}
-            fromDate={fromDate}
-            setFromDate={setFromDate}
-            toDate={toDate}
-            setToDate={setToDate}
-          />
-        </Box>
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-    <Grid
-                sx={{
-                  ml: 5,
-                  mt: 1,
-                  mb: 1,
-                  mr: 5,
-                  paddingBottom: 2,
-                }}
-              >
-                <TextField
-                  fullWidth
-                  label="Search"
-                  id="search"
-                  onChange={handleSearch}
-                />
-              </Grid>
+
       <TableContainer sx={{ maxHeight: 700, maxWidth: 1800 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>

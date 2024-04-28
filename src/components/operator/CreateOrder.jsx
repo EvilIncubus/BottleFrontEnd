@@ -56,6 +56,17 @@ export default function CreateOrder() {
   const { orderId, setOrderId } = React.useContext(OrderId);
 
   const handleClickOpen = () => {
+    const savedToken = localStorage.getItem("token");
+    axios
+      .get(url + "/rest/api/user/getListOfCustomersForOperator", {
+        headers: {
+          Authorization: `Bearer ${savedToken}`,
+        },
+      })
+      .then((response) => {
+        setCompanies(response.data);
+        console.log(response.data);
+      });
     setCompany(companies.map(({ company }) => ({ label: company })));
     setOpen(true);
   };
@@ -85,6 +96,7 @@ export default function CreateOrder() {
       })
       .then((response) => {
         console.log(response.data);
+        setCompanies(response.data)
         setCompany(
           response.data.map(({ company }) => ({
             label: company,
@@ -93,24 +105,11 @@ export default function CreateOrder() {
       });
   };
 
-  React.useEffect(() => {
-    const savedToken = localStorage.getItem("token");
-    axios
-      .get(url + "/rest/api/user/getListOfCustomersForOperator", {
-        headers: {
-          Authorization: `Bearer ${savedToken}`,
-        },
-      })
-      .then((response) => {
-        setCompanies(response.data);
-        console.log(response.data);
-      });
-  }, []);
-
   const hanldeCreateOrder = async () => {
     const customer = companies.find((customer) => {
       return customer.company === selectCustomer;
     });
+    console.log(customer)
     console.log(companies)
     const savedToken = localStorage.getItem("token");
     const createStatus = "Created";

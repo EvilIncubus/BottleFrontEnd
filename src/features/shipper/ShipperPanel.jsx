@@ -141,7 +141,7 @@ export const ShipperPanel = () => {
             <IconButton
               color="inherit"
               onClick={() => {
-                navigate("/ShipperPanel/Notificaion"),
+                navigate("/ShipperPanel/ShipperNotification"),
                   handleSetHeader("Notificaion");
               }}
             >

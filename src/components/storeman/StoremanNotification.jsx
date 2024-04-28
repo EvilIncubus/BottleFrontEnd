@@ -27,7 +27,7 @@ const columns = [
   { id: 'status', label: 'Order Status', minWidth: 120},
 ];
 
-export default function StoremanPanelOrders() {
+export default function StoremanNotification() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [data, setData] = React.useState([]);
@@ -105,20 +105,13 @@ export default function StoremanPanelOrders() {
     console.log(fromDate)
     console.log(toDate)
     axios
-      .post(
-        url + "/rest/api/customer/order/filterOrderForOperator",
-        {
-          operatorEmail: user.sub,
-          status: statusQuery,
-          fromDate,
-          toDate,
-          page: page + 1,
-          size: rowsPerPage,
-        },
+      .get(
+        url + "/rest/api/notification/getNotificationOrders",
         {
           headers: {
             Authorization: `Bearer ${savedToken}`,
           },
+          params: {size: rowsPerPage, page: page + 1}
         }
       )
       .then((response) => {
@@ -136,41 +129,9 @@ export default function StoremanPanelOrders() {
           mt: 4,
         }}
       >
-        <Box
-          m="left"
-          sx={{
-            width: 300,
-            ml: 4,
-          }}
-        >
-          <StoremanDashboardFilter
-            handleChangeStatus={handleChangeStatus}
-            handleChangeFromDate={handleChangeFromDate}
-            handleChangeToDate={handleChangeToDate}
-            fromDate={fromDate}
-            setFromDate={setFromDate}
-            toDate={toDate}
-            setToDate={setToDate}
-          />
-        </Box>
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-    <Grid
-                sx={{
-                  ml: 5,
-                  mt: 1,
-                  mb: 1,
-                  mr: 5,
-                  paddingBottom: 2,
-                }}
-              >
-                <TextField
-                  fullWidth
-                  label="Search"
-                  id="search"
-                  onChange={handleSearch}
-                />
-              </Grid>
+
       <TableContainer sx={{ maxHeight: 700, maxWidth: 1800 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>

@@ -141,7 +141,7 @@ export const StoremanPanel = () => {
             <IconButton
               color="inherit"
               onClick={() => {
-                navigate("/StoremanPanel/Notificaion"),
+                navigate("/StoremanPanel/StoremanNotification"),
                   handleSetHeader("Notificaion");
               }}
             >

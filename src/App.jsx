@@ -23,6 +23,8 @@ import { ShipperPanel } from "./features/shipper/ShipperPanel";
 import ShipperDashboard from "./components/shipper/ShipperDashboard";
 import ShipperCurrentOrder from "./components/shipper/ShipperCurrentOrder";
 import { ShipperCurrentOrderNotFount } from "./components/shipper/ShipperCurentOrderNotFound";
+import StoremanNotification from "./components/storeman/StoremanNotification";
+import ShipperNotification from "./components/shipper/ShipperNotification";
 
 
 export default function App() {
@@ -97,6 +99,11 @@ export default function App() {
                 path="/StoremanPanel/StoremanCurrentOrderNotFound"
                 element={<StoremanCurrentOrderNotFount />}
               />
+              <Route
+                exact
+                path="/StoremanPanel/StoremanNotification"
+                element={<StoremanNotification />}
+              />
             </Route>
             <Route exact path="/ShipperPanel" element={<ShipperPanel />}>
             <Route
@@ -113,6 +120,11 @@ export default function App() {
                 exact
                 path="/ShipperPanel/ShipperCurrentOrderNotFound"
                 element={<ShipperCurrentOrderNotFount />}
+              />
+              <Route
+                exact
+                path="/ShipperPanel/ShipperNotification"
+                element={<ShipperNotification />}
               />
             </Route>
           </Routes>
