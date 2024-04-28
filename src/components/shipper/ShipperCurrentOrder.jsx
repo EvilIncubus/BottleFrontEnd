@@ -92,11 +92,68 @@ export default function ShipperCurrentOrder() {
       });
   }, []);
 
-  const hanldeSubmitOrder = async () => {
-    const newStatus = "ReadyForPickUp";
+  const hanldeGenerateInvoice = async () => {
+    const savedToken = localStorage.getItem("token");
+    console.log(orderDetails)
+    axios
+      .post(url + "/rest/api/customer/invoice/generateInvoice", 
+        orderDetails,
+        {
+        headers: {
+          Authorization: `Bearer ${savedToken}`,
+        },
+      })
+      .then((response) => {
+        console.log(response);
+      });
+  };
+
+  const hanldePrintInvoice = async () => {
     const savedToken = localStorage.getItem("token");
     axios
-      .get(url + "/rest/api/customer/order/submitOrderStatus", {
+      .get(url + "/rest/api/customer/invoice/downloadInvoiceByOrderId", {
+        headers: {
+          Authorization: `Bearer ${savedToken}`,
+        },
+        params: {
+          orderId
+        },
+      })
+      .then(
+        response => {
+          const url = window.URL.createObjectURL(new Blob([response.data]));
+          const link = document.createElement('a');
+          link.href = url;
+          link.setAttribute('download', 'downloaded_file.txt');
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+      });
+  };
+
+  const hanldeSubmitOrder = async () => {
+    const newStatus = "OnTheWay";
+    const savedToken = localStorage.getItem("token");
+    axios
+      .get(url + "/rest/api/customer/order/updateOrderStatus", {
+        headers: {
+          Authorization: `Bearer ${savedToken}`,
+        },
+        params: {
+          orderId,
+          status: newStatus,
+        },
+      })
+      .then((response) => {
+        console.log(response);
+      });
+  };
+
+  const hanldeSubmitFinishOrder = async () => {
+    const newStatus = "Delivered";
+    const savedToken = localStorage.getItem("token");
+    axios
+      .get(url + "/rest/api/customer/order/updateOrderStatus", {
         headers: {
           Authorization: `Bearer ${savedToken}`,
         },
@@ -219,6 +276,36 @@ export default function ShipperCurrentOrder() {
                 <TableCell colSpan={2}>
                   <Button
                     onClick={() => {
+                      hanldeGenerateInvoice();
+                    }}
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    sx={{ mt: 1, mb: 1 }}
+                  >
+                    Create Invoice
+                  </Button>
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell colSpan={2}>
+                  <Button
+                    onClick={() => {
+                      hanldePrintInvoice();
+                    }}
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    sx={{ mt: 1, mb: 1 }}
+                  >
+                    Download Invoice
+                  </Button>
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell colSpan={2}>
+                  <Button
+                    onClick={() => {
                       hanldeSubmitOrder();
                     }}
                     type="submit"
@@ -226,7 +313,22 @@ export default function ShipperCurrentOrder() {
                     variant="contained"
                     sx={{ mt: 1, mb: 1 }}
                   >
-                    Submit Order
+                    Pick Up Order
+                  </Button>
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell colSpan={2}>
+                  <Button
+                    onClick={() => {
+                      hanldeSubmitFinishOrder();
+                    }}
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    sx={{ mt: 1, mb: 1 }}
+                  >
+                    Finish Order
                   </Button>
                 </TableCell>
               </TableRow>

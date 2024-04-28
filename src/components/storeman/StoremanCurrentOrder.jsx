@@ -96,7 +96,7 @@ export default function StoremanCurrentOrder() {
     const newStatus = "ReadyForPickUp";
     const savedToken = localStorage.getItem("token");
     axios
-      .get(url + "/rest/api/customer/order/submitOrderStatus", {
+      .get(url + "/rest/api/customer/order/updateOrderStatus", {
         headers: {
           Authorization: `Bearer ${savedToken}`,
         },
@@ -114,7 +114,7 @@ export default function StoremanCurrentOrder() {
     const newStatus = "OrderRejectedByWarehouse";
     const savedToken = localStorage.getItem("token");
     axios
-      .get(url + "/rest/api/customer/order/submitOrderStatus", {
+      .get(url + "/rest/api/customer/order/setOrderConfirmation", {
         headers: {
           Authorization: `Bearer ${savedToken}`,
         },
